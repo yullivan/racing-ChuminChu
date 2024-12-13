@@ -26,13 +26,14 @@ public class Application {
             cars.add(new Car(name));
         }
 
+
         CarList carList = new CarList(cars);
+
         //carList는 3개만 적을 수 있는 상태임
-        List<Car> 우승자목록 = carList.우승자내놔();
+//        List<Car> 우승자목록 = carList.우승자내놔();
         //자동차 전부 다 전진
-        carList.전진시켜라();
-        printCarList(carList);
-/*
+//        carList.전진시켜라();
+//        printCarList(carList);
         for (int i = 0; i < userCount.getUserCount(); i++) {
 
             // cars의 차들을 전진시키기
@@ -40,7 +41,7 @@ public class Application {
                 selectMoveOrStop(car);
                 print(car);
             }
-        }*/
+        }
     }
 
 
