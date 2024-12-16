@@ -1,82 +1,47 @@
 package racing;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.Array;
 import java.util.*;
-import java.util.stream.Stream;
 
 
 public class Application {
 
     public static void main(String[] args) {
-        System.out.println("<부릉부릉 자동차 레이싱 게임>");
+        System.out.println("부릉아 달려보자!");
 
-        //차 입력받기
-        List<String> names = carGetInput();
+        //자동차 입력받기
+        List<Car> gameCars = CarsUserInput.getInputCar();
 
-        //사용자 횟수
-        UserCount userCount = userGetInput();
-
-        //차 이름이랑 위치 리스트
-        // List<String> names -> List<Car> cars
-        ArrayList<Car> cars = new ArrayList<>();
-        for (String name : names) {
-            cars.add(new Car(name));
+        //이 출력이 좀,,,, 고칠 필요가 있음..
+        for (Car gameCar : gameCars) {
+            System.out.print(gameCar.getName());
         }
 
+        //시행 횟수
+        int count = NumUserInput.getInputUser();
 
-        CarList carList = new CarList(cars);
+        // 1. Cars의 이름과 위치를 받자
+        Cars cars = new Cars(gameCars);
 
-        //carList는 3개만 적을 수 있는 상태임
-//        List<Car> 우승자목록 = carList.우승자내놔();
-        //자동차 전부 다 전진
-//        carList.전진시켜라();
-//        printCarList(carList);
-        for (int i = 0; i < userCount.getUserCount(); i++) {
-
-            // cars의 차들을 전진시키기
-            for (Car car : cars) {
-                selectMoveOrStop(car);
-                print(car);
-            }
+        //전체 반복 횟수
+        for (int i = 1; i < count+1; i++) {
+            //출력
+            System.out.println("(" + i +") 회");
+            cars.print();
+            System.out.println(" ");
         }
+        GameOver.remoteCar(cars);
     }
 
 
-    //차 입력받기
-    private static List<String> carGetInput(){
-        System.out.println("레이스에 참가할 자동차들의 이름을 쉼표(,)로 구분하여 입력하세요.");
-        Scanner scanner = new Scanner(System.in);
-        String carInput = scanner.nextLine();
-        //배열을 리스트로
-        List<String> names = List.of(carInput.split(","));
-        return names;
 
-    }
 
-    //시행횟수
-    private static UserCount userGetInput() {
-        System.out.println("몇 회 시행할까요?");
-        Scanner scanner = new Scanner(System.in);
-        Integer Input = scanner.nextInt();
-        //UserCount userInput = new UserCount(Input);
-        return new UserCount(Input);
-    }
 
-    //차의 위치를 증가시켜라
-    private static void selectMoveOrStop (Car car) {
+
+    /* 이걸 쓰다보니까 랜덤수가 3보다 크면 차량을 이동을 해야되는데 이동시킬 함수는 Cars안에 있어서 이 함수에 가져오기가 쉽지 않음 그래서 그냥 Cars안으로 옮기면 더 편하게 쓸 수 있지 않을까?
+    private static String print(){
         if(generationRandomNum() > 3){
-            car.setPosition(car.getPosition() + 1);
-        }
-    }
 
-    //나타내주는 함수
-    private static void print(Car car) {
-        String moveStr = "-";
-        String repeat = moveStr.repeat(car.getPosition());
-        System.out.println(car.getCarName() + " " + "\uD83C\uDFCE\uFE0F" + repeat);
+        }
     }
 
     //랜덤수 발생
@@ -85,5 +50,7 @@ public class Application {
         int num = random.nextInt(1,7);
         return num;
     }
+    */
+
 
 }
