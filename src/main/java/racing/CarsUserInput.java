@@ -20,10 +20,14 @@ public class CarsUserInput {
     }
 
     //String으로 받은 gameCars들을 쉼표로 구분해 새로운 List<Car>로 만듦
-    public static List<Car> getInputCar() {
+    public static Cars getInputCar() {
+
         //이 함수 안에는 List<String> 의 값이 있어 이거를 List<Car>로 바꿔줄거야
-        return getInputStringCar().stream()
+        List<Car> cars=  getInputStringCar().stream()
                 .map((gameCar) -> new Car(gameCar)).toList();
+
+        Cars cars1 = new Cars(cars);
+        return cars1;
     }
 
 
