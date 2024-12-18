@@ -1,9 +1,6 @@
 package racing;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Cars {
     private List<Car> cars = new ArrayList<>();
@@ -16,7 +13,8 @@ public class Cars {
     }
 
     public List<Car> getCars() {
-        return cars;
+
+        return cars.stream().toList();
     }
 
     public void print() {
@@ -32,6 +30,8 @@ public class Cars {
             System.out.println(carMove.get(i));
         }
     }
+
+
 
 
 
@@ -62,4 +62,24 @@ public class Cars {
         int num = random.nextInt(1,7);
         return num;
     }*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cars cars1 = (Cars) o;
+        return Objects.equals(cars, cars1.cars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(cars);
+    }
+
+    public void printCarsName() {
+        List<String> carList = this.getCars().stream().map(car -> car.getName()).toList();
+
+        System.out.println(carList);
+
+    }
 }
