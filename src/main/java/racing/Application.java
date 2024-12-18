@@ -9,27 +9,24 @@ public class Application {
         System.out.println("부릉아 달려보자!");
 
         //자동차 입력받기
-        List<Car> gameCars = CarsUserInput.getInputCar();
+        Cars gameCars = CarsUserInput.getInputCar();
 
-        //이 출력이 좀,,,, 고칠 필요가 있음..
-        for (Car gameCar : gameCars) {
-            System.out.print(gameCar.getName());
-        }
+
+        gameCars.printCarsName();
 
         //시행 횟수
         int count = NumUserInput.getInputUser();
 
         // 1. Cars의 이름과 위치를 받자
-        Cars cars = new Cars(gameCars);
 
         //전체 반복 횟수
         for (int i = 1; i < count+1; i++) {
             //출력
             System.out.println("(" + i +") 회");
-            cars.print();
+            gameCars.print();
             System.out.println(" ");
         }
-        GameOver.remoteCar(cars);
+        GameOver.remoteCar(gameCars);
     }
 
 
